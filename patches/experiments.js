@@ -13,14 +13,14 @@ export default {
          configurable: true
       });
 
-      for (let i = 0; i < Experiments._changeCallbacks.length; i++) {
-         Experiments._changeCallbacks[i]();  
+      for (let i = 0; i < Experiments._changeCallbacks.listeners.length; i++) {
+         Experiments._changeCallbacks.listeners[i]();  
       }
 
       return () => {
          Experiments.isDeveloper = Experiments._isDeveloper;
-         for (let i = 0; i < Experiments._changeCallbacks.length; i++) {
-            Experiments._changeCallbacks[i]();  
+         for (let i = 0; i < Experiments._changeCallbacks.listeners.length; i++) {
+            Experiments._changeCallbacks.listeners[i]();  
          }
       };
    }
