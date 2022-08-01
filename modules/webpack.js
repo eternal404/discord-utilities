@@ -34,17 +34,17 @@ export default new class Webpack {
 
    constructor() {
       this.whenReady = this.waitForGlobal.then(() => new Promise(async onReady => {
-         const [Dispatcher, { ActionTypes } = {}] = await this.findByProps(
-            ['dirtyDispatch'], ['API_HOST', 'ActionTypes'],
+         const [Dispatcher, UserStore] = await this.findByProps(
+            ['dirtyDispatch'], ['getCurrentUser', '_dispatchToken'],
             { cache: false, bulk: true, wait: true, forever: true }
          );
 
          const listener = function () {
-            Dispatcher.unsubscribe(ActionTypes.START_SESSION, listener);
+            Dispatcher.unsubscribe('START_SESSION', listener);
             onReady();
          };
 
-         Dispatcher.subscribe(ActionTypes.START_SESSION, listener);
+         Dispatcher.subscribe('START_SESSION', listener);
       }));
    }
 
