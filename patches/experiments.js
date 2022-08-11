@@ -11,7 +11,7 @@ export default {
       const Users = Webpack.findByProps('getCurrentUser', 'getUser');
 
       // Wait for dispatcher handlers
-      const events = Dispatcher._orderedActionHandlers;
+      const events = Dispatcher._actionHandlers._orderedActionHandlers;
       while (!events.CONNECTION_OPEN) {
          await new Promise(r => setTimeout(r, 10));
       }
